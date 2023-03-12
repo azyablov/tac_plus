@@ -5,7 +5,7 @@ LABEL maintainer="anton.zyablov@nokia.com"\
     org.label-schema.vendor="Anton Zyablov, Nokia"\
     org.label-schema.version="0.3"\
     org.label-schema.schema-version="1.0"\
-    org.label-schema.docker.cmd="docker run -p 49:49/tcp -v $(pwd)/log:/var/log  -v $(pwd)/config:/etc/tacacs+ -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro -e 'FLAGS=-S -G -t' --name tacp -d rsyslog:latest" 
+    org.label-schema.docker.cmd="docker run -p 49:49/tcp -v $(pwd)/log:/var/log  -v $(pwd)/config:/etc/tacacs+ -e 'FLAGS=-S -G -t' --name tacp -d rsyslog:latest" 
 ARG USER=tacplus
 ARG HOME=/home/${USER}
 RUN apt-get update && apt-get upgrade -y
