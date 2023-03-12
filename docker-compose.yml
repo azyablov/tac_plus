@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  tac_plus:
+    image: azyablov/tac_plus:latest
+    build: 
+      context: .
+      labels:
+        maintainer: "Anton Zyablov"
+        com.nokia.ni.devops.tac-plus: "v0.3"
+      args:
+        - USER=tacplus
+    container_name: tacp
+    expose:
+      - "49/tcp"
+    ports:
+      - "49:49/tcp"
+    restart: always
+    environment: 
+      # Should be the same as mount target
+      CONFIG_PATH: /etc/tacacs+
+      FLAGS: "-S -G -t"
+      # For DEBUG
+      # FLAGS: "-S -G -t -d 16"
+      # DEBFILE: /var/log/tac_plus.log
+    volumes:
+      - type: bind
+        source: ./log
+        target: /var/log
+      - type: bind
+        source: ./config
+        target: /etc/tacacs+
+        read_only: true
+
+
