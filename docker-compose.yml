@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   tac_plus:
     image: azyablov/tac_plus:latest
@@ -18,17 +17,16 @@ services:
     environment: 
       # Should be the same as mount target
       CONFIG_PATH: /etc/tacacs+
-      FLAGS: "-S -G -t"
+      FLAGS: "-S -G -t -d 16 "
       # For DEBUG
       # FLAGS: "-S -G -t -d 16"
       # DEBFILE: /var/log/tac_plus.log
     volumes:
-      - type: bind
-        source: ./log
-        target: /var/log
-      - type: bind
-        source: ./config
-        target: /etc/tacacs+
-        read_only: true
+      - tac-log:/var/log
+      - tac-config:/etc/tacacs+:ro
 
-
+volumes:
+  tac-log:
+    external: true
+  tac-config:
+    external: true
